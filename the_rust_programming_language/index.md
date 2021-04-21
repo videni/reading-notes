@@ -1,6 +1,7 @@
 《[Rust 权威指南](https://kaisery.github.io/trpl-zh-cn/)》读书笔记
 =====================
 - [《Rust 权威指南》读书笔记](#rust-权威指南读书笔记)
+  - [RefCell<T> 在运行时记录借用](#refcellt-在运行时记录借用)
   - [解引用运算符](#解引用运算符)
     - [基本使用](#基本使用)
     - [作用于Box<T>智能指针](#作用于boxt智能指针)
@@ -20,6 +21,11 @@
   - [迷惑人的Package layout](#迷惑人的package-layout)
   - [Integration test](#integration-test)
   - [Rust clippy](#rust-clippy)
+
+## RefCell<T> 在运行时记录借用
+
+当创建不可变和可变引用时，我们分别使用 & 和 &mut 语法，然而，对于 RefCell<T> 来说，则是 borrow 和 borrow_mut 方法。borrow 方法返回 Ref<T> 类型的智能指针，borrow_mut 方法返回 RefMut 类型的智能指针。这两个类型都实现了 Deref，所以可以当作常规引用对待。
+RefCell<T> 记录当前有多少个活动的 Ref<T> 和 RefMut<T> 智能指针。每次调用 borrow，RefCell<T> 将活动的不可变借用计数加一。当 Ref<T> 值离开作用域时，不可变借用计数减一。记住：RefCell<T>在运行时确保借用规则，即“任何时候只允许有多个不可变借用或一个可变借用”。
 
 ## 解引用运算符
 ### 基本使用
@@ -56,12 +62,14 @@ fn main() {
 }
 ```
 一样能工作，因为Box实现了Deref trait.
+没有 Deref trait 的话，编译器只会解引用 & 引用类型。deref 方法向编译器提供了获取任何实现了 Deref trait 的类型的值，并且调用这个类型的 deref 方法来获取一个它知道如何解引用的 & 引用的能力。
 
 #### Box<T> 使用场景
 
 * 当有一个在编译时未知大小的类型，而又想要在需要确切大小的上下文中使用这个类型值的时候
 * 当有大量数据并希望在确保数据不被拷贝的情况下转移所有权的时候
 * 当希望拥有一个值并只关心它的类型是否实现了特定 trait 而不是其具体类型的时候，又被称为 trait 对象（trait object)
+
 ## 为类型实现trait
 
 
