@@ -1,6 +1,10 @@
-《Rust 权威指南 》读书笔记
+《[Rust 权威指南](https://kaisery.github.io/trpl-zh-cn/)》读书笔记
 =====================
-- [《Rust 权威指南 》读书笔记](#rust-权威指南-读书笔记)
+- [《Rust 权威指南》读书笔记](#rust-权威指南读书笔记)
+  - [解引用运算符](#解引用运算符)
+    - [基本使用](#基本使用)
+    - [作用于Box<T>智能指针](#作用于boxt智能指针)
+      - [Box<T> 使用场景](#boxt-使用场景)
   - [为类型实现trait](#为类型实现trait)
   - [String VS str](#string-vs-str)
   - [并发](#并发)
@@ -15,8 +19,50 @@
   - [生命周期](#生命周期)
   - [迷惑人的Package layout](#迷惑人的package-layout)
   - [Integration test](#integration-test)
+  - [Rust clippy](#rust-clippy)
 
-##  为类型实现trait
+## 解引用运算符
+### 基本使用
+常规引用是一个指针类型，一种理解指针的方式是将其看成指向储存在其他某处值的箭头. 示例
+```
+fn main() {
+    let x = 5;
+    let y = &x;
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
+}
+```
+变量 x 存放了一个 i32 值 5。y 等于 x 的一个引用。可以断言 x 等于 5。然而，如果希望对 y 的值做出断言，必须使用 *y 来追踪引用所指向的值（也就是 解引用）
+如果尝试编写 assert_eq!(5, y);，则会得到如下编译错误
+```
+error[E0277]: can't compare `{integer}` with `&{integer}`
+ --> src/main.rs:6:5
+  |
+6 |     assert_eq!(5, y);
+  |     ^^^^^^^^^^^^^^^^^ no implementation for `{integer} == &{integer}`
+  |
+  = help: the trait `std::cmp::PartialEq<&{integer}>` is not implemented for
+  `{integer}`
+```
+### 作用于Box<T>智能指针
+```
+fn main() {
+    let x = 5;
+    let y = Box::new(x);
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
+}
+```
+一样能工作，因为Box实现了Deref trait.
+
+#### Box<T> 使用场景
+
+* 当有一个在编译时未知大小的类型，而又想要在需要确切大小的上下文中使用这个类型值的时候
+* 当有大量数据并希望在确保数据不被拷贝的情况下转移所有权的时候
+* 当希望拥有一个值并只关心它的类型是否实现了特定 trait 而不是其具体类型的时候，又被称为 trait 对象（trait object)
+## 为类型实现trait
 
 
 孤儿规则： 只有当trait或类型定义于我们的库中时，我们才能为类型实现对应的trait。
@@ -139,6 +185,4 @@ tests
 1. tests目录每个文件都是一个包，如果不想被rust视作独立的包，可采用mod.rs命名规范。
 2. 二进制包如src/main.rs无法导入作用域，只有库代码包（library crate）才可以。
 
-
-
-
+## [Rust clippy](https://rust-lang.github.io/rust-clippy/master/)
