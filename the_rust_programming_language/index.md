@@ -1,6 +1,7 @@
 《[Rust 权威指南](https://kaisery.github.io/trpl-zh-cn/)》读书笔记
 =====================
 - [《Rust 权威指南》读书笔记](#rust-权威指南读书笔记)
+  - [注释](#注释)
   - [RefCell<T> 在运行时记录借用](#refcellt-在运行时记录借用)
   - [解引用运算符](#解引用运算符)
     - [基本使用](#基本使用)
@@ -9,6 +10,7 @@
   - [为类型实现trait](#为类型实现trait)
   - [String VS str](#string-vs-str)
   - [并发](#并发)
+    - [Mutex(Mutual exclusion)](#mutexmutual-exclusion)
     - [Rc VS Arc](#rc-vs-arc)
     - [Rc(Reference counter), 引用计数智能指针](#rcreference-counter-引用计数智能指针)
     - [Arc(Atomic counter), 原子引用计数](#arcatomic-counter-原子引用计数)
@@ -22,6 +24,11 @@
   - [Integration test](#integration-test)
   - [Rust clippy](#rust-clippy)
 
+## 注释
+
+// 描述实现细节
+/// 描述包的使用方法，支持Markdown语法
+//! 为整个包括整个模块提供文档
 ## RefCell<T> 在运行时记录借用
 
 当创建不可变和可变引用时，我们分别使用 & 和 &mut 语法，然而，对于 RefCell<T> 来说，则是 borrow 和 borrow_mut 方法。borrow 方法返回 Ref<T> 类型的智能指针，borrow_mut 方法返回 RefMut 类型的智能指针。这两个类型都实现了 Deref，所以可以当作常规引用对待。
@@ -81,6 +88,13 @@ fn main() {
 String在堆上分配，str不可变，固定长度，在二进制文件中。
 
 ## 并发
+
+### Mutex(Mutual exclusion)
+
+在任意时刻只允许一个线程访问数据
+* 必须在使用数据前获取锁
+* 在使用完互斥体守护的数据后释放锁。
+  
 
 ### Rc VS Arc
 ### Rc(Reference counter), 引用计数智能指针
