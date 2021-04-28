@@ -3,6 +3,7 @@
 - [《Rust 权威指南》读书笔记](#rust-权威指南读书笔记)
   - [注释](#注释)
   - [RefCell<T> 在运行时记录借用](#refcellt-在运行时记录借用)
+    - [RefCellT> vs Cell<T>](#refcellt-vs-cellt)
   - [解引用运算符](#解引用运算符)
     - [基本使用](#基本使用)
     - [作用于Box<T>智能指针](#作用于boxt智能指针)
@@ -26,13 +27,16 @@
 
 ## 注释
 
-// 描述实现细节
-/// 描述包的使用方法，支持Markdown语法
-//! 为整个包括整个模块提供文档
+* // 描述实现细节
+* /// 描述使用方法，支持Markdown语法
+* //! 为整个包括整个模块提供文档
+
 ## RefCell<T> 在运行时记录借用
 
 当创建不可变和可变引用时，我们分别使用 & 和 &mut 语法，然而，对于 RefCell<T> 来说，则是 borrow 和 borrow_mut 方法。borrow 方法返回 Ref<T> 类型的智能指针，borrow_mut 方法返回 RefMut 类型的智能指针。这两个类型都实现了 Deref，所以可以当作常规引用对待。
 RefCell<T> 记录当前有多少个活动的 Ref<T> 和 RefMut<T> 智能指针。每次调用 borrow，RefCell<T> 将活动的不可变借用计数加一。当 Ref<T> 值离开作用域时，不可变借用计数减一。记住：RefCell<T>在运行时确保借用规则，即“任何时候只允许有多个不可变借用或一个可变借用”。
+
+### [RefCellT> vs Cell<T>](https://blog.iany.me/2019/02/rust-cell-and-refcell/)
 
 ## 解引用运算符
 ### 基本使用
