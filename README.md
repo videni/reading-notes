@@ -6,6 +6,10 @@ Rust笔记
 
   Rust的学习曲线还是比较陡峭的，虽然这本书看了好几遍，但里面知识点总是记不住。
 
+
+## [Async Rust](./async.md)
+
+
 ## 如何可视化debug rust程序?
 
 [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
