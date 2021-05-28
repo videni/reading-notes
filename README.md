@@ -6,7 +6,9 @@ Rust笔记
 
   Rust的学习曲线还是比较陡峭的，虽然这本书看了好几遍，但里面知识点总是记不住。
 
+## [Rust by Examples](https://rustwiki.org/zh-CN/rust-by-example/index.html)
 
+## [Rust reference](https://minstrel1977.gitee.io/rust-reference/introduction.html)
 ## [Async Rust](./async.md)
 
 
@@ -18,3 +20,5 @@ Rust笔记
 ## 如何编写Macro?
 
 [quote](https://github.com/dtolnay/quote)
+
+## [Rust design pattern](https://rust-unofficial.github.io/patterns/)
