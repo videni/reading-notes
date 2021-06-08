@@ -45,3 +45,23 @@ Rust有很多特性，阅读完《Rust权威指南》后必读。
 * [spinlock vs Mutext](https://stackoverflow.com/questions/5869825/when-should-one-use-a-spinlock-instead-of-mutex)
 
 * 最popular的库-[parking_lot](https://docs.rs/parking_lot/0.11.1/parking_lot/)
+
+## 高级
+
+这些内容遇到的时候再来看。
+### [内存分配： ptmalloc、tcmalloc和jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize/)
+不需要ptmalloc、tcmalloc和jemalloc实现原理，知道哪个性能好即可。
+
+### [big-endian vs little-endian](https://www.section.io/engineering-education/what-is-little-endian-and-big-endian/)
+
+  列如
+
+  0x12345678
+
+  little-endian : 78 56 34 12
+
+  big-endian: 12 34 56 78
+
+### [Rust死灵书](https://learnku.com/docs/nomicon/2018)
+  书如其名，没有理解《Rust权威指南》千万不要俩看这本书，本书将深入挖掘 Rust 非安全（unsafe）编程中的一些必要但是又可怕的细节。由于此类问题天然的恐怖，本书散发出的不可描述的恐惧之力，极可能将你的神经彻底撕成千万个绝望的碎片。
+

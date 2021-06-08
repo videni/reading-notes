@@ -21,3 +21,4 @@ A series of resources about Rust async
 
 * [Tokio internals](https://cafbit.com/post/tokio_internals/)
   
+## [Async rust programming](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
