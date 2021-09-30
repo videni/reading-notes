@@ -3,7 +3,7 @@
 - [《Rust 权威指南》读书笔记](#rust-权威指南读书笔记)
   - [注释](#注释)
   - [RefCell<T> 在运行时记录借用](#refcellt-在运行时记录借用)
-    - [RefCellT> vs Cell<T>](#refcellt-vs-cellt)
+    - [RefCell<T> vs Cell<T>](#refcellt-vs-cellt)
   - [解引用运算符](#解引用运算符)
     - [基本使用](#基本使用)
     - [作用于Box<T>智能指针](#作用于boxt智能指针)
